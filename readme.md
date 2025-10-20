@@ -65,7 +65,7 @@ An AI receptionist system that handles customer inquiries and escalates unknown 
 
 ## Database Design
 
-help_requests - Ephemeral workflow state
+help_requests 
 
 ```bash
 {
@@ -76,7 +76,7 @@ help_requests - Ephemeral workflow state
 }
 ```
 
-knowledge_base - Permanent learned knowledge
+knowledge_base
 
 ```bash
 {

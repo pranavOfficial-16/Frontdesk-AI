@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 async def help_request(ctx: RunContext, question: str) -> str:
     """
     After saying "Let me check with my supervisor and get back to you shortly." execute this function
-    If you don't know the answer to a question try this function
+    If you don't know the answer to a question
 
     Args:
         question (str): The unknown question.

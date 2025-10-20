@@ -1,6 +1,6 @@
 ## Frontdesk AI - Human-in-the-Loop System
 
-A AI receptionist system that handles customer inquiries and escalates unknown questions to human supervisors, creating a self-learning knowledge base.
+An AI receptionist system that handles customer inquiries and escalates unknown questions to human supervisors, creating a self-learning knowledge base.
 
 ## Tech stack
 

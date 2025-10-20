@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Supervisor</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <noscript
+      ><link rel="stylesheet" href="/static/css/noscript.css"
+    /></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Sidebar -->
+    <section id="sidebar">
+      <div class="inner">
+        <nav>
+          <ul>
+            <li><a href="#PendingRequests">pending requests</a></li>
+            <li><a href="#TotalRequests">Resolved / Unresolved</a></li>
+            <li><a href="#LearnedAnswers">Learned Answers</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- PendingRequests -->
+      <section id="PendingRequests" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+          {% set pending_requests = help_requests | selectattr("status",
+          "equalto", "pending") | list %} {% if pending_requests %}
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in pending_requests %}
+              <tr>
+                <td>{{ loop.index }}. {{ request.question | capitalize }}</td>
+                <td>
+                  <form
+                    method="POST"
+                    action="/resolve_request"
+                    style="display: flex; gap: 5px"
+                  >
+                    <input type="hidden" name="id" value="{{ request.id }}" />
+                    <input
+                      type="text"
+                      name="answer"
+                      placeholder="Type your answer"
+                    />
+                    <button type="submit" class="button">Submit</button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No pending help requests found!</p>
+          {% endif %}
+        </div>
+      </section>
+
+      <!-- TotalRequests -->
+      <section id="TotalRequests" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+          {% if help_requests %}
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in help_requests %}
+              <tr>
+                <td>{{ request.question | capitalize }}</td>
+                <td>
+                  {% if request.answer %} {{ request.answer }} {% else %}
+                  <em style="color: gray">Waiting for answer...</em>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if request.status == "pending" %}
+                  <span>⏳ Pending</span>
+                  {% else %}
+                  <span>✅ Resolved</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No help requests found.</p>
+          {% endif %}
+        </div>
+      </section>
+
+      <!-- LearnedAnswers -->
+      <section id="LearnedAnswers" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+          {% if knowledge_base %}
+          <table>
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request in knowledge_base %}
+              <tr>
+                <td>{{ request.question | capitalize }}</td>
+                <td>
+                  {% if request.answer %} {{ request.answer }} {% else %}
+                  <em style="color: gray">Waiting for answer...</em>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No Learned Answers found!</p>
+          {% endif %}
+        </div>
+      </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.scrollex.min.js"></script>
+    <script src="/static/js/jquery.scrolly.min.js"></script>
+    <script src="/static/js/browser.min.js"></script>
+    <script src="/static/js/breakpoints.min.js"></script>
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

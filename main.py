@@ -1,4 +1,5 @@
 import os
+import logging
 import firebase_admin
 
 from fastapi import FastAPI
@@ -22,6 +23,10 @@ FIREBASE_FILE_PATH = os.getenv("FIREBASE_FILE_PATH")
 cred = credentials.Certificate(FIREBASE_FILE_PATH)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
+
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 
 # Render the supervisor UI
@@ -67,6 +72,10 @@ async def resolve_request(id: str = Form(...), answer: str = Form(...)):
             return JSONResponse(
                 {"error": "Question not found in document"}, status_code=400
             )
+
+        logging.info(f"[Supervisor] Resolved question and answer'")
+        logging.info(f"[Supervisor] Question: {question}")
+        logging.info(f"[Supervisor] Answer: {answer}")
 
         # Update the help request document
         doc_ref.update(

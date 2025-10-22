@@ -5,8 +5,8 @@ from livekit import agents
 from livekit.plugins import google
 from livekit.agents import AgentSession, Agent, RoomInputOptions
 
-from constants import INIT_MAIN, MODEL_TEMPERATURE
-from constants import AGENT_INSTRUCTION, SESSION_INSTRUCTION, AGENT_VOICE
+from prompts import AGENT_INSTRUCTION, SESSION_INSTRUCTION
+from constants import INIT_MAIN, MODEL_TEMPERATURE, AGENT_VOICE
 
 from firebase import delete_help_requests, delete_knowledge_base
 

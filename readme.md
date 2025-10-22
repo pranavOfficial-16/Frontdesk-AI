@@ -6,7 +6,6 @@ An AI receptionist system that handles customer inquiries and escalates unknown 
 
 - **LiveKit** - Real-time voice AI platform
 - **Google gemini** - LLM model
-- **AssemblyAI** - STT model
 - **Firebase** - Cloud Real-time database
 - **FastAPI** - Backend web framework for UI and firebase integration
 - **HTML/Bootstrap** - Simple supervisor UI
@@ -58,7 +57,7 @@ An AI receptionist system that handles customer inquiries and escalates unknown 
 
 ## Design Flow
 
-- **Real-time Voice Pipeline**: LiveKit handles WebRTC streams → AssemblyAI for STT → Google gemini for LLM model
+- **Real-time Voice Pipeline**: LiveKit handles WebRTC streams → Google gemini for LLM model
 - **Separation of Concerns**: Voice agent, Supervisor UI, and Database is real-time
 - **Unified Data Model**: Same document IDs across help_requests and knowledge_base collections for traceability
 - **AI Agent**: function-based design where tools handle all external interactions
